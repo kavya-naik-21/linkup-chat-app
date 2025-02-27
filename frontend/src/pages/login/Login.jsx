@@ -1,9 +1,21 @@
 import React from "react";
+import { useRef } from "react";
+import useLogin from "../../hooks/useLogin";
 import { FaUserAlt } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { Link } from "react-router";
 
 const Login = () => {
+  const usernameRef = useRef();
+  const passwordRef = useRef();
+
+  const { login, isLoading } = useLogin();
+  const handleLogin = async () => {
+    await login({
+      username: usernameRef.current.value,
+      password: passwordRef.current.value,
+    });
+  };
   return (
     <div className="flex justify-center items-center h-screen w-screen bg-[#c7dfe9]">
       <div className="border-2 rounded-2xl h-3/4 w-2/4 bg-gray-700 text-white border-gray-700 shadow-gray-900 shadow-2xl flex flex-col justify-center items-center">
@@ -22,6 +34,7 @@ const Login = () => {
             <div className="flex items-center mt-2">
               <FaUserAlt className="mr-2" />
               <input
+                ref={usernameRef}
                 className="border-2 border-gray-200 rounded-sm px-4 py-1 w-full"
                 type="text"
                 id="username"
@@ -33,6 +46,7 @@ const Login = () => {
             <div className="flex items-center mt-2">
               <RiLockPasswordFill className="mr-2" />
               <input
+                ref={passwordRef}
                 className="border-2 border-gray-200 rounded-sm px-4 py-1 w-full"
                 type="password"
                 id="password"
@@ -40,7 +54,10 @@ const Login = () => {
             </div>
           </div>
           <div className="flex justify-center mt-6">
-            <button className="bg-[#009EE2] px-6 py-2 rounded-sm text-white text-md font-bold">
+            <button
+              className="bg-[#009EE2] px-6 py-2 rounded-sm text-white text-md font-bold"
+              onClick={handleLogin}
+            >
               LOGIN
             </button>
           </div>
