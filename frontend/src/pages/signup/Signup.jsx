@@ -1,8 +1,29 @@
-import React from "react";
+import React, { useRef } from "react";
 import { FaUserAlt } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
+import { Link } from "react-router-dom";
+import useSignup from "../../hooks/useSignup";
+import { useAuthContext } from "../../context/AuthContext";
 
 const Signup = () => {
+  const fullNameRef = useRef();
+  const usernameRef = useRef();
+  const passwordRef = useRef();
+  const confirmPasswordRef = useRef();
+  const genderRef = useRef();
+
+  const { signup, isLoading } = useSignup();
+
+  const handleSignup = async () => {
+    signup({
+      fullName: fullNameRef.current.value,
+      username: usernameRef.current.value,
+      gender: genderRef.current.value,
+      password: passwordRef.current.value,
+      confirmPassword: confirmPasswordRef.current.value,
+    });
+  };
+
   return (
     <div className="flex justify-center items-center h-screen w-screen bg-[#c7dfe9]">
       <div className="border-2 rounded-2xl h-11/12 w-2/4 bg-gray-700 text-white border-gray-700 shadow-gray-900 shadow-2xl flex flex-col justify-center items-center">
@@ -21,9 +42,11 @@ const Signup = () => {
             <div className="flex items-center mt-2">
               <FaUserAlt className="mr-2" />
               <input
+                ref={fullNameRef}
                 className="border-2 border-gray-200 rounded-sm px-4 py-1 w-full"
                 type="text"
-                id="username"
+                id="fullName"
+                autoComplete="fullName"
               />
             </div>
           </div>
@@ -32,9 +55,11 @@ const Signup = () => {
             <div className="flex items-center mt-2">
               <FaUserAlt className="mr-2" />
               <input
+                ref={usernameRef}
                 className="border-2 border-gray-200 rounded-sm px-4 py-1 w-full"
                 type="text"
                 id="username"
+                autoComplete="username"
               />
             </div>
           </div>
@@ -44,6 +69,7 @@ const Signup = () => {
             <div className="flex space-x-6 mt-2">
               <label className="flex items-center space-x-2">
                 <input
+                  ref={genderRef}
                   type="radio"
                   name="gender"
                   value="male"
@@ -53,6 +79,7 @@ const Signup = () => {
               </label>
               <label className="flex items-center space-x-2">
                 <input
+                  ref={genderRef}
                   type="radio"
                   name="gender"
                   value="female"
@@ -67,9 +94,11 @@ const Signup = () => {
             <div className="flex items-center mt-2">
               <RiLockPasswordFill className="mr-2" />
               <input
+                ref={passwordRef}
                 className="border-2 border-gray-200 rounded-sm px-4 py-1 w-full"
                 type="password"
                 id="password"
+                autoComplete="current-password"
               />
             </div>
           </div>
@@ -78,15 +107,20 @@ const Signup = () => {
             <div className="flex items-center mt-2">
               <RiLockPasswordFill className="mr-2" />
               <input
+                ref={confirmPasswordRef}
                 className="border-2 border-gray-200 rounded-sm px-4 py-1 w-full"
                 type="password"
                 id="confirm-password"
+                autoComplete="current-password"
               />
             </div>
           </div>
 
           <div className="flex justify-center mt-6">
-            <button className="bg-[#009EE2] px-6 py-2 rounded-sm text-white text-md font-bold">
+            <button
+              className="bg-[#009EE2] px-6 py-2 rounded-sm text-white text-md font-bold "
+              onClick={handleSignup}
+            >
               SIGN UP
             </button>
           </div>
@@ -96,9 +130,11 @@ const Signup = () => {
           <span className="px-4 text-white">OR</span>
           <div className="flex-grow border-t border-gray-300"></div>
         </div>
-        <div className="text-center">
-          Already a user ? <span className="font-bold">Login Now</span>
-        </div>
+        <Link to="/login">
+          <div className="text-center">
+            Already a user ? <span className="font-bold">Login Now</span>
+          </div>
+        </Link>
       </div>
     </div>
   );

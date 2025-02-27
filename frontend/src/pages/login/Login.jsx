@@ -1,6 +1,7 @@
 import React from "react";
 import { FaUserAlt } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
@@ -10,7 +11,7 @@ const Login = () => {
           <span className="font-bold text-2xl">WELCOME</span>
         </div>
         <div className="text-center pb-8">
-           <span className="">Login with Username</span>
+          <span className="">Login with Username</span>
         </div>
         <form
           className="w-3/4 pl-10 pr-10"
@@ -49,9 +50,12 @@ const Login = () => {
           <span className="px-4 text-white">OR</span>
           <div className="flex-grow border-t border-gray-300"></div>
         </div>
-        <div className="text-center">
-          Don't have an account? <span className="font-bold">Register Now</span>
-        </div>
+        <Link to="/signup">
+          <div className="text-center">
+            Don't have an account?
+            <span className="font-bold">Register Now</span>
+          </div>
+        </Link>
       </div>
     </div>
   );
