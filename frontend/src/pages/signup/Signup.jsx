@@ -1,9 +1,8 @@
 import React, { useRef } from "react";
 import { FaUserAlt } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import useSignup from "../../hooks/useSignup";
-import { useAuthContext } from "../../context/AuthContext";
 
 const Signup = () => {
   const fullNameRef = useRef();
@@ -15,7 +14,7 @@ const Signup = () => {
   const { signup, isLoading } = useSignup();
 
   const handleSignup = async () => {
-    signup({
+    await signup({
       fullName: fullNameRef.current.value,
       username: usernameRef.current.value,
       gender: genderRef.current.value,
@@ -135,6 +134,12 @@ const Signup = () => {
             Already a user ? <span className="font-bold">Login Now</span>
           </div>
         </Link>
+        <div>
+						<button className='btn btn-block btn-sm mt-2 border border-slate-700' disabled={isLoading}>
+							{isLoading ? <span className='loading loading-spinner'></span> : "Sign Up"}
+						</button>
+					</div>
+
       </div>
     </div>
   );

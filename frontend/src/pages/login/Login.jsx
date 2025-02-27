@@ -1,7 +1,7 @@
 import React from "react";
 import { FaUserAlt } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 const Login = () => {
   return (

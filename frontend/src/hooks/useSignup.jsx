@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useAuthContext } from "../context/AuthContext";
-import { ToastContainer, toast } from "react-toastify";
 
 const useSignup = () => {
   const [isLoading, setIsLoading] = useState(false);
