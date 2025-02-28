@@ -16,8 +16,8 @@ const useLogin = () => {
         },
         body: JSON.stringify({ username, password }),
       });
-      console.log("res", res);
-      const data = res.json();
+
+      const data = await res.json();
 
       if (data.error) {
         console.log("some error is occured", data.error);
