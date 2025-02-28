@@ -6,7 +6,9 @@ import { useSelector } from "react-redux";
 const Conversations = () => {
   const { isLoading, getConversations } = useConversations();
 
-  const conversations = useSelector((store) => store.conversations);
+  const conversationsAll = useSelector((store) => store.conversations);
+
+  const { conversations } = conversationsAll;
 
   const handleGetConversations = async () => {
     await getConversations();
