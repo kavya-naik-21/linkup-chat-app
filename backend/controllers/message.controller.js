@@ -45,7 +45,7 @@ export const getMessage = async (req, res) => {
       participants: { $all: [senderId, userToChatId] },
     }).populate("messages");
 
-    if (!conversation) return res.status(200).json([]);
+    if (!conversation) return res.status(200).json({messages: []});
 
     res.status(201).json({ messages: conversation.messages });
   } catch (error) {
