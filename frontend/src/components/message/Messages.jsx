@@ -1,32 +1,16 @@
-import React, { useEffect } from "react";
-import useMessages from "../../hooks/useMessages";
-import { useSelector } from "react-redux";
+import React from "react";
 import { useAuthContext } from "../../context/AuthContext";
+import useGetMessages from "../../hooks/useGetMessages";
 
 const Messages = () => {
-  const { getMessages, isLoading } = useMessages();
-  let messages = useSelector((store) => store.messages.messages);
+  const {messages, isLoading} = useGetMessages();
 
   const { authUser } = useAuthContext();
   const loggedInUser = authUser._id;
 
-  const selectedConversation = useSelector(
-    (store) => store.conversations.selectedConversation
-  );
-
-  const  currentRecieverId  = selectedConversation?._id;
-
-  const handleGetMessages = async () => {
-    await getMessages({ id: currentRecieverId });
-  };
-
-  useEffect(() => {
-    handleGetMessages();
-  }, [currentRecieverId]);
-
   return (
     <div className=" h-4/5 overflow-auto">
-      {messages?.map((msg) => (
+      {!isLoading && messages.length> 0 && messages?.map((msg) => (
         <div
           key={msg.id}
           className={`flex ${
