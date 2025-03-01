@@ -12,21 +12,25 @@ const io = new Server(server, {
   },
 });
 
-const loggedInUsersMap = new Map();
+const userSocktMap = new Map();
+
+export const getReceiverSocketId = (receiverUserId) => {
+  return userSocktMap[receiverUserId];
+};
 
 io.on("connection", (socket) => {
   console.log("new user connected", socket.id);
-  console.log("===============================================")
-  
+  console.log("===============================================");
+
   const loggedInUserId = socket.handshake.query.loggedInUserId;
 
-  loggedInUsersMap[loggedInUserId] = socket.id
+  userSocktMap[loggedInUserId] = socket.id;
 
-  socket.emit("getOnlineUsers", loggedInUsersMap);
+  socket.emit("getOnlineUsers", userSocktMap);
 
   socket.on("disconnect", () => {
     console.log("user disconnected xxxxxx", socket.id);
-    console.log("===============================================")
+    console.log("===============================================");
   });
 });
 
