@@ -21,6 +21,7 @@ const useLogin = () => {
 
       if (data.error) {
         console.log("some error is occured", data.error);
+        return;
       }
 
       localStorage.setItem("chat-user", JSON.stringify(data));
