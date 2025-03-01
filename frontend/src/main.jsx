@@ -6,15 +6,16 @@ import { AuthContextProvider } from "./context/AuthContext.jsx";
 import { BrowserRouter } from "react-router";
 import appStore from "./store/AppStore.jsx";
 import { Provider } from "react-redux";
+import { SockectContextProvider } from "./context/SocketContext.jsx";
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <BrowserRouter>
-      <Provider store={appStore}>
-        <AuthContextProvider>
+  <BrowserRouter>
+    <Provider store={appStore}>
+      <AuthContextProvider>
+        <SockectContextProvider>
           <App />
-        </AuthContextProvider>
-      </Provider>
-    </BrowserRouter>
-  </StrictMode>
+        </SockectContextProvider>
+      </AuthContextProvider>
+    </Provider>
+  </BrowserRouter>
 );
