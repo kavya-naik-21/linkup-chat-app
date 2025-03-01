@@ -1,5 +1,4 @@
-import React from "react";
-import { CgProfile } from "react-icons/cg";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setSelectedConversation } from "../../store/ConversationsSlice";
 import { useScokectContext } from "../../context/SocketContext";
@@ -14,9 +13,6 @@ const Conversation = ({ conversation }) => {
     dispatch(setSelectedConversation(conversation));
   };
 
-  if (onlineUsers != null) {
-    console.log("onLine users", onlineUsers[currentReceiverId]);
-  }
   return (
     <div
       className="rounded-lg bg-white shadow-gray-600 shadow-2xl hover:bg-pink-600 hover:cursor-default"

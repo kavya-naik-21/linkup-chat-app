@@ -26,11 +26,13 @@ io.on("connection", (socket) => {
 
   userSocktMap[loggedInUserId] = socket.id;
 
-  socket.emit("getOnlineUsers", userSocktMap);
+  io.emit("getOnlineUsers", userSocktMap);
 
   socket.on("disconnect", () => {
     console.log("user disconnected xxxxxx", socket.id);
     console.log("===============================================");
+    delete userSocktMap[loggedInUserId];
+    io.emit("getOnlineUsers", userSocktMap);
   });
 });
 
