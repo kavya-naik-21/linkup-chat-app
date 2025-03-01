@@ -5,7 +5,7 @@ import { setSelectedConversation } from "../../store/ConversationsSlice";
 import { useScokectContext } from "../../context/SocketContext";
 
 const Conversation = ({ conversation }) => {
-  const { fullName, profilePic, _id: currentRecieverId } = conversation;
+  const { fullName, profilePic, _id: currentReceiverId } = conversation;
 
   const { onlineUsers } = useScokectContext();
 
@@ -15,7 +15,7 @@ const Conversation = ({ conversation }) => {
   };
 
   if (onlineUsers != null) {
-    console.log("onLine users", onlineUsers[currentRecieverId]);
+    console.log("onLine users", onlineUsers[currentReceiverId]);
   }
   return (
     <div
@@ -28,7 +28,7 @@ const Conversation = ({ conversation }) => {
         <div className="mt-2 ml-4 flex flex-wrap flex-col">
           <span className="">{fullName}</span>
           <span className="font-extralight text-sm">
-            {onlineUsers[currentRecieverId] ? "Online" : "Offline"}
+            {onlineUsers[currentReceiverId] ? "Online" : "Offline"}
           </span>
         </div>
       </div>

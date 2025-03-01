@@ -8,12 +8,12 @@ const MessageHeader = () => {
   );
 
   if (!selectedConversation) return;
-  const { fullName, profilePic, _id: currentRecieverId } = selectedConversation;
+  const { fullName, profilePic, _id: currentReceiverId } = selectedConversation;
 
   const { onlineUsers } = useScokectContext();
 
   if (onlineUsers !== null) {
-    console.log("onLine users", onlineUsers[currentRecieverId]);
+    console.log("onLine users", onlineUsers[currentReceiverId]);
   }
   return (
     <div className="border-b-2 m-1">
@@ -23,7 +23,7 @@ const MessageHeader = () => {
         <div className="mt-2 ml-4 flex flex-wrap flex-col">
           <span className="">{fullName}</span>
           <span className="font-extralight text-sm">
-            {onlineUsers[currentRecieverId] ? "Online" : "Offline"}
+            {onlineUsers[currentReceiverId] ? "Online" : "Offline"}
           </span>
         </div>
       </div>

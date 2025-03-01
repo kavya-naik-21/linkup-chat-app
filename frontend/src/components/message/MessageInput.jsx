@@ -10,12 +10,12 @@ const MessageInput = () => {
     (store) => store.conversations.selectedConversation
   );
 
-  const currentRecieverId = selectedConversation?._id;
+  const currentReceiverId = selectedConversation?._id;
 
   const handleSendMessage = async () => {
     if (messageRef.current.value && !isSending) {
       await sendMessage({
-        id: currentRecieverId,
+        id: currentReceiverId,
         message: messageRef.current.value,
       });
       messageRef.current.value = null;

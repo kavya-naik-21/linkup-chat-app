@@ -10,13 +10,13 @@ const useGetMessages = () => {
 
   const selectedConversation = useSelector((store) => store.conversations.selectedConversation);
 
-  const currentRecieverId = selectedConversation?._id;
+  const currentReceiverId = selectedConversation?._id;
 
   useEffect(() => {
     const getMessages = async () => {
       setIsLoading(true);
       try {
-        const res = await fetch(`/api/messages/${currentRecieverId}`, {
+        const res = await fetch(`/api/messages/${currentReceiverId}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -36,8 +36,8 @@ const useGetMessages = () => {
         setIsLoading(false);
       }
     };
-    if (currentRecieverId) getMessages();
-  }, [currentRecieverId, setMessages]);
+    if (currentReceiverId) getMessages();
+  }, [currentReceiverId, setMessages]);
 
   return {messages, isLoading}
 };

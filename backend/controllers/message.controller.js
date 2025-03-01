@@ -4,22 +4,22 @@ import { getReceiverSocketId, io } from "../socket/socket.js";
 export const sendMessage = async (req, res) => {
   try {
     const { message } = req.body;
-    const { id: recieverId } = req.params;
+    const { id: receiverId } = req.params;
     const { _id: senderId } = req.user;
 
     let conversation = await Conversation.findOne({
-      participants: { $all: [senderId, recieverId] },
+      participants: { $all: [senderId, receiverId] },
     });
 
     if (!conversation) {
       conversation = await new Conversation({
-        participants: [senderId, recieverId],
+        participants: [senderId, receiverId],
       });
     }
 
     const newMessage = await new Message({
       senderId,
-      recieverId,
+      receiverId,
       message,
     });
 
@@ -29,7 +29,7 @@ export const sendMessage = async (req, res) => {
     await conversation.save();
     await newMessage.save();
 
-    const receiverSocketId = getReceiverSocketId(recieverId);
+    const receiverSocketId = getReceiverSocketId(receiverId);
     if (receiverSocketId) {
       io.to(receiverSocketId).emit("newMessage", newMessage);
     }
